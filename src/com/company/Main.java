@@ -1,13 +1,11 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
         boolean loop = true;
-        ArrayList<Car> cars = new ArrayList<Car>();
+        ArrayList<Car> cars = new ArrayList<>();
         Scanner input = new Scanner(System.in);
 
         System.out.println("Welcome to Will's car lot management system!");
@@ -16,10 +14,12 @@ public class Main {
             for (Car car : cars) {
                 System.out.println(car.toString());
             }
+
             System.out.println(cars.size());
-            System.out.println("[Add] car, [Delete] car, or [Filter] cars. [q] to quit.");
+            System.out.println("[Add] car or [Delete] car. [q] to quit.");
             String action = input.nextLine();
-            if (action.equals("Add")) {
+            input.nextLine();
+            if (action.equalsIgnoreCase("Add")) {
                 System.out.println("Make:");
                 String make = input.nextLine();
                 System.out.println("Model:");
@@ -31,22 +31,19 @@ public class Main {
                 Car newCar = new Car(make, model, year, price);
                 cars.add(newCar);
             }
-//            else if (action.equals("Delete")) {
-//                System.out.println("What is the model of the car?");
-//                String dmodel = input.nextLine();
-//                for (int i = 0; i < cars.size(); i++) {
-//                    Car car = cars.get(i);
-//                    if (car.model == dmodel) {
-//                        cars.remove(car);
-//                    }
-//                }
-//            }
-            else if (action.equals("q")) {
-                ;
+            else if (action.equalsIgnoreCase("Delete")) {
+                System.out.println("What is the model of the car?");
+                String dmodel = input.nextLine();
+                for (int i = 0; i < cars.size(); i++) {
+                    Car car = cars.get(i);
+                    if (car.model.equals(dmodel)) {
+                        cars.remove(car);
+                    }
+                }
+            }
+            else if (action.equalsIgnoreCase("q")) {
+                loop = false;
             }
         }
-
-
-
     }
 }
